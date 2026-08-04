@@ -19,7 +19,7 @@ export default function Carrosseis() {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pb-10">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pb-10">
       <Link to="/" className="inline-block pt-4 pb-2 text-sm text-fit-green font-medium">
         ← Voltar
       </Link>

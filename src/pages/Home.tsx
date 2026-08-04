@@ -18,7 +18,7 @@ export default function Home() {
       : recipes;
 
   return (
-    <div className="max-w-md mx-auto px-4 pb-10">
+    <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 pb-10">
       <header className="pt-6 pb-4 text-center">
         <h1 className="text-2xl font-bold text-fit-dark">Receitas Fit 🥑</h1>
         <p className="text-sm text-gray-500">Práticas, rápidas e de verdade</p>
@@ -30,7 +30,7 @@ export default function Home() {
         </Link>
       </header>
 
-      <div className="mb-4">
+      <div className="mb-4 md:max-w-md">
         <OfferBanner />
       </div>
 
@@ -64,7 +64,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
         {filtered.map((r) => (
           <RecipeCard key={r.id} recipe={r} />
         ))}

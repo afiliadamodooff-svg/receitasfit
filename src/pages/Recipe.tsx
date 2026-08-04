@@ -19,12 +19,12 @@ export default function Recipe() {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pb-10">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pb-10">
       <Link to="/" className="inline-block pt-4 pb-2 text-sm text-fit-green font-medium">
         ← Voltar
       </Link>
 
-      <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-xl" />
+      <img src={recipe.image} alt={recipe.title} className="w-full h-48 md:h-72 object-cover rounded-xl" />
 
       <div className="flex items-center justify-between mt-3">
         <h1 className="text-xl font-bold text-fit-dark">{recipe.title}</h1>
