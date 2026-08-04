@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 
 const KEYWORDS = ["air fryer", "whey protein", "pote hermetico marmita", "squeeze academia"];
 
@@ -28,7 +28,7 @@ async function buscarOferta(appId, secret, keyword) {
   return (json.data && json.data.productOfferV2 && json.data.productOfferV2.nodes) || [];
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   const appId = process.env.SHOPEE_APP_ID;
   const secret = process.env.SHOPEE_SECRET;
 
