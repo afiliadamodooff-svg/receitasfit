@@ -1,10 +1,13 @@
-import offers from "../data/offers.json";
+import { useEffect, useRef } from "react";
+import fallbackOffers from "../data/offers.json";
 
 type Recipe = {
   title: string;
   ingredients: string[];
   steps: string[];
 };
+
+type Offer = { affiliateLink: string };
 
 function buildRecipeText(recipe: Recipe) {
   const ingredients = recipe.ingredients.map((i) => `- ${i}`).join("\n");
@@ -13,7 +16,21 @@ function buildRecipeText(recipe: Recipe) {
 }
 
 export default function ExportRecipeButton({ recipe }: { recipe: Recipe }) {
+  const offersRef = useRef<Offer[]>(fallbackOffers);
+
+  useEffect(() => {
+    fetch("/api/shopee-offers")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data.offers) && data.offers.length > 0) {
+          offersRef.current = data.offers;
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   function handleExport() {
+    const offers = offersRef.current;
     const offer = offers[Math.floor(Math.random() * offers.length)];
 
     window.open(offer.affiliateLink, "_blank", "noopener,noreferrer");
