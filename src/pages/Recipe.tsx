@@ -2,10 +2,12 @@ import { useParams, Link } from "react-router-dom";
 import recipes from "../data/recipes.json";
 import ExportRecipeButton from "../components/ExportRecipeButton";
 import OfferBanner from "../components/OfferBanner";
+import { useFavorites } from "../hooks/useFavorites";
 
 export default function Recipe() {
   const { id } = useParams();
   const recipe = recipes.find((r) => r.id === id);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   if (!recipe) {
     return (
@@ -24,7 +26,16 @@ export default function Recipe() {
 
       <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-xl" />
 
-      <h1 className="text-xl font-bold text-fit-dark mt-3">{recipe.title}</h1>
+      <div className="flex items-center justify-between mt-3">
+        <h1 className="text-xl font-bold text-fit-dark">{recipe.title}</h1>
+        <button
+          onClick={() => toggleFavorite(recipe.id)}
+          aria-label="Favoritar receita"
+          className="text-2xl shrink-0 ml-2"
+        >
+          {isFavorite(recipe.id) ? "❤️" : "🤍"}
+        </button>
+      </div>
       <p className="text-xs text-gray-500 mt-1">⏱ {recipe.prepTime} · {recipe.servings}</p>
 
       <h2 className="font-semibold text-fit-dark mt-5 mb-2">Ingredientes</h2>

@@ -1,21 +1,33 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import recipes from "../data/recipes.json";
 import categories from "../data/categories.json";
 import RecipeCard from "../components/RecipeCard";
 import OfferBanner from "../components/OfferBanner";
+import { useFavorites } from "../hooks/useFavorites";
 
 export default function Home() {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | "favoritos" | null>(null);
+  const { favorites } = useFavorites();
 
-  const filtered = activeCategory
-    ? recipes.filter((r) => r.category === activeCategory)
-    : recipes;
+  const filtered =
+    activeCategory === "favoritos"
+      ? recipes.filter((r) => favorites.includes(r.id))
+      : activeCategory
+      ? recipes.filter((r) => r.category === activeCategory)
+      : recipes;
 
   return (
     <div className="max-w-md mx-auto px-4 pb-10">
       <header className="pt-6 pb-4 text-center">
         <h1 className="text-2xl font-bold text-fit-dark">Receitas Fit 🥑</h1>
         <p className="text-sm text-gray-500">Práticas, rápidas e de verdade</p>
+        <Link
+          to="/carrosseis"
+          className="inline-block mt-2 text-xs font-semibold text-fit-orange"
+        >
+          🎠 Baixar carrosséis pro Instagram
+        </Link>
       </header>
 
       <div className="mb-4">
@@ -42,6 +54,14 @@ export default function Home() {
             {c.emoji} {c.label}
           </button>
         ))}
+        <button
+          onClick={() => setActiveCategory("favoritos")}
+          className={`shrink-0 px-3 py-1.5 rounded-full text-sm font-medium ${
+            activeCategory === "favoritos" ? "bg-fit-green text-white" : "bg-white text-fit-dark"
+          }`}
+        >
+          ❤️ Favoritos
+        </button>
       </div>
 
       <div className="grid grid-cols-2 gap-3">

@@ -18,14 +18,16 @@ export default function ExportRecipeButton({ recipe }: { recipe: Recipe }) {
 
     window.open(offer.affiliateLink, "_blank", "noopener,noreferrer");
 
-    const text = buildRecipeText(recipe);
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${recipe.title}.txt`;
-    link.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => {
+      const text = buildRecipeText(recipe);
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${recipe.title}.txt`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }, 600);
   }
 
   return (
