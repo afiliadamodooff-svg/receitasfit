@@ -1,6 +1,18 @@
 import crypto from "crypto";
 
-const KEYWORDS = ["air fryer", "whey protein", "pote hermetico marmita", "squeeze academia"];
+const KEYWORDS = [
+  "air fryer",
+  "liquidificador",
+  "pote hermetico marmita",
+  "jogo de potes de vidro",
+  "tabua de corte cozinha",
+  "jogo de facas cozinha",
+  "forma de silicone",
+  "balanca de cozinha digital",
+  "garrafa squeeze",
+  "copo medidor cozinha",
+  "potes de tempero organizador",
+];
 
 function assinar(appId, secret, payload) {
   const timestamp = Math.floor(Date.now() / 1000);
