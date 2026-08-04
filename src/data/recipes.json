@@ -1,0 +1,119 @@
+[
+  {
+    "id": "panqueca-banana-aveia",
+    "title": "Panqueca de Banana e Aveia",
+    "category": "cafe-da-manha",
+    "prepTime": "10 min",
+    "servings": "2 porções",
+    "image": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=800",
+    "ingredients": [
+      "1 banana madura amassada",
+      "2 ovos",
+      "3 colheres de sopa de aveia em flocos",
+      "1 colher de chá de canela",
+      "1 colher de chá de fermento em pó"
+    ],
+    "steps": [
+      "Amasse a banana em uma tigela.",
+      "Misture os ovos, a aveia, a canela e o fermento.",
+      "Aqueça uma frigideira antiaderente em fogo médio.",
+      "Despeje pequenas porções e doure dos dois lados.",
+      "Sirva com frutas por cima."
+    ]
+  },
+  {
+    "id": "omelete-espinafre-queijo",
+    "title": "Omelete de Espinafre com Queijo Cottage",
+    "category": "cafe-da-manha",
+    "prepTime": "8 min",
+    "servings": "1 porção",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=800",
+    "ingredients": [
+      "2 ovos",
+      "1 punhado de espinafre picado",
+      "2 colheres de sopa de queijo cottage",
+      "Sal e pimenta a gosto"
+    ],
+    "steps": [
+      "Bata os ovos com sal e pimenta.",
+      "Refogue o espinafre rapidamente em uma frigideira.",
+      "Adicione os ovos batidos e cozinhe em fogo baixo.",
+      "Acrescente o cottage antes de dobrar a omelete.",
+      "Sirva quente."
+    ]
+  },
+  {
+    "id": "frango-grelhado-batata-doce",
+    "title": "Frango Grelhado com Batata-Doce",
+    "category": "almoco",
+    "prepTime": "30 min",
+    "servings": "2 porções",
+    "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800",
+    "ingredients": [
+      "2 filés de peito de frango",
+      "1 batata-doce média",
+      "Azeite, alho e ervas a gosto",
+      "Sal e pimenta a gosto"
+    ],
+    "steps": [
+      "Tempere o frango com alho, sal e ervas.",
+      "Corte a batata-doce em cubos e leve ao forno com azeite.",
+      "Grelhe o frango até dourar dos dois lados.",
+      "Sirva o frango com a batata-doce assada."
+    ]
+  },
+  {
+    "id": "salada-quinoa-grao-de-bico",
+    "title": "Salada de Quinoa com Grão-de-Bico",
+    "category": "almoco",
+    "prepTime": "20 min",
+    "servings": "2 porções",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+    "ingredients": [
+      "1 xícara de quinoa cozida",
+      "1 xícara de grão-de-bico cozido",
+      "Tomate, pepino e cebola roxa picados",
+      "Azeite e limão a gosto"
+    ],
+    "steps": [
+      "Misture a quinoa e o grão-de-bico em uma tigela.",
+      "Adicione os vegetais picados.",
+      "Tempere com azeite, limão, sal e pimenta.",
+      "Sirva fria ou em temperatura ambiente."
+    ]
+  },
+  {
+    "id": "mix-castanhas-frutas",
+    "title": "Mix de Castanhas com Frutas Secas",
+    "category": "lanche",
+    "prepTime": "5 min",
+    "servings": "1 porção",
+    "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=800",
+    "ingredients": [
+      "1 punhado de castanha-do-pará",
+      "1 punhado de amêndoas",
+      "Uva-passa a gosto"
+    ],
+    "steps": [
+      "Misture todos os ingredientes em um pote.",
+      "Consuma como lanche entre as refeições."
+    ]
+  },
+  {
+    "id": "vitamina-morango-whey",
+    "title": "Vitamina de Morango com Whey",
+    "category": "lanche",
+    "prepTime": "5 min",
+    "servings": "1 porção",
+    "image": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=800",
+    "ingredients": [
+      "1 scoop de whey protein sabor baunilha",
+      "1 xícara de morangos congelados",
+      "200ml de leite ou bebida vegetal"
+    ],
+    "steps": [
+      "Bata todos os ingredientes no liquidificador.",
+      "Sirva imediatamente."
+    ]
+  }
+]

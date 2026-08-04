@@ -1,0 +1,7 @@
+[
+  { "id": "cafe-da-manha", "label": "Café da Manhã", "emoji": "🍳" },
+  { "id": "almoco", "label": "Almoço", "emoji": "🍗" },
+  { "id": "lanche", "label": "Lanche", "emoji": "🥜" },
+  { "id": "jantar", "label": "Jantar", "emoji": "🥗" },
+  { "id": "doce-fit", "label": "Doce Fit", "emoji": "🍫" }
+]

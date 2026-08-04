@@ -1,0 +1,20 @@
+[
+  {
+    "id": "oferta-1",
+    "title": "Air Fryer em promoção",
+    "image": "https://images.unsplash.com/photo-1626202801151-3f95e9d7b6b3?w=600",
+    "affiliateLink": "https://s.shopee.com.br/SEU_LINK_AQUI"
+  },
+  {
+    "id": "oferta-2",
+    "title": "Whey Protein com desconto",
+    "image": "https://images.unsplash.com/photo-1579722821273-0f6c1b5d4313?w=600",
+    "affiliateLink": "https://s.shopee.com.br/SEU_LINK_AQUI"
+  },
+  {
+    "id": "oferta-3",
+    "title": "Kit potes herméticos para marmita",
+    "image": "https://images.unsplash.com/photo-1615937691194-97dbd4d5d2c1?w=600",
+    "affiliateLink": "https://s.shopee.com.br/SEU_LINK_AQUI"
+  }
+]

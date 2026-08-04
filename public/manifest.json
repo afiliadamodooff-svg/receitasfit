@@ -1,0 +1,9 @@
+{
+  "name": "Receitas Fit",
+  "short_name": "ReceitasFit",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8EE",
+  "theme_color": "#1F9D55",
+  "icons": []
+}
