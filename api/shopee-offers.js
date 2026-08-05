@@ -26,7 +26,7 @@ function assinar(appId, secret, payload) {
 }
 
 async function buscarOferta(appId, secret, keyword) {
-  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 8) { nodes { itemId productName offerLink imageUrl priceMin commissionRate } } }`;
+  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 8) { nodes { itemId productName offerLink imageUrl priceMin priceDiscountRate commissionRate } } }`;
   const payload = { query };
   const headers = assinar(appId, secret, payload);
 
@@ -61,13 +61,21 @@ export default async function handler(req, res) {
 
     const offers = [...nodes1, ...nodes2]
       .filter((n) => n.offerLink && n.productName)
-      .map((n) => ({
-        id: String(n.itemId),
-        title: n.productName,
-        image: n.imageUrl,
-        price: parseFloat(n.priceMin) || null,
-        affiliateLink: n.offerLink,
-      }));
+      .map((n) => {
+        const price = parseFloat(n.priceMin) || null;
+        const discountRate = parseFloat(n.priceDiscountRate) || 0;
+        const originalPrice = price && discountRate > 0 ? price / (1 - discountRate / 100) : null;
+        return {
+          id: String(n.itemId),
+          title: n.productName,
+          image: n.imageUrl,
+          price,
+          originalPrice,
+          discountRate,
+          isFlash: discountRate >= 20,
+          affiliateLink: n.offerLink,
+        };
+      });
 
     res.status(200).json({ offers });
   } catch (err) {
