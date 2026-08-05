@@ -215,11 +215,16 @@ async function buildCardSlide(
 }
 
 // Slide final — CTA para o app
-async function buildCtaSlide(): Promise<HTMLCanvasElement> {
+async function buildCtaSlide(img: HTMLImageElement): Promise<HTMLCanvasElement> {
   const canvas = newCanvas();
   const ctx = canvas.getContext("2d")!;
 
-  ctx.fillStyle = DARK;
+  ctx.save();
+  ctx.filter = "blur(28px)";
+  drawCoverImage(ctx, img, -20, -20, W + 40, H + 40);
+  ctx.restore();
+
+  ctx.fillStyle = "rgba(11,42,29,0.88)";
   ctx.fillRect(0, 0, W, H);
 
   ctx.textAlign = "center";
@@ -229,7 +234,7 @@ async function buildCtaSlide(): Promise<HTMLCanvasElement> {
 
   ctx.font = "bold 40px Segoe UI, sans-serif";
   ctx.fillStyle = ORANGE;
-  wrapCentered(ctx, "📲 Baixe o app Receitas Fit — de graça", W / 2, 650, W - 200, 54);
+  wrapCentered(ctx, "📲 Baixe o app Receitas Fit de graça", W / 2, 650, W - 200, 54);
 
   ctx.fillStyle = "#fff";
   roundRect(ctx, W / 2 - 280, 760, 560, 110, 55);
@@ -288,7 +293,7 @@ export async function generateAndDownloadCarousel(recipe: Recipe) {
     canvas: await buildCardSlide(recipe, img, "Modo de preparo", recipe.steps, true, "3/4"),
     name: `${recipe.id}-3-preparo.png`,
   });
-  slides.push({ canvas: await buildCtaSlide(), name: `${recipe.id}-4-cta.png` });
+  slides.push({ canvas: await buildCtaSlide(img), name: `${recipe.id}-4-cta.png` });
 
   for (let i = 0; i < slides.length; i++) {
     const blob = await canvasToBlob(slides[i].canvas);
