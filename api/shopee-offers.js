@@ -2,7 +2,7 @@ import crypto from "crypto";
 
 const KEYWORDS = [
   "air fryer",
-  "liquidificador",
+  "liquidificador portatil",
   "pote hermetico marmita",
   "jogo de potes de vidro",
   "tabua de corte cozinha",
@@ -12,6 +12,11 @@ const KEYWORDS = [
   "garrafa squeeze",
   "copo medidor cozinha",
   "potes de tempero organizador",
+  "escorredor de louca",
+  "organizador de geladeira",
+  "processador de alimentos",
+  "espremedor de frutas",
+  "kit utensilios de cozinha",
 ];
 
 function assinar(appId, secret, payload) {
@@ -26,7 +31,7 @@ function assinar(appId, secret, payload) {
 }
 
 async function buscarOferta(appId, secret, keyword) {
-  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 4) { nodes { itemId productName offerLink imageUrl priceMin priceDiscountRate commissionRate } } }`;
+  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 2) { nodes { itemId productName offerLink imageUrl priceMin priceDiscountRate commissionRate } } }`;
   const payload = { query };
   const headers = assinar(appId, secret, payload);
 
@@ -53,7 +58,7 @@ export default async function handler(req, res) {
 
   try {
     const shuffled = [...KEYWORDS].sort(() => Math.random() - 0.5);
-    const chosen = shuffled.slice(0, 4);
+    const chosen = shuffled.slice(0, 7);
     const results = await Promise.all(chosen.map((k) => buscarOferta(appId, secret, k)));
 
     const seenIds = new Set();
@@ -63,7 +68,8 @@ export default async function handler(req, res) {
     for (const n of results.flat()) {
       if (!n.offerLink || !n.productName) continue;
       const id = String(n.itemId);
-      const titleKey = n.productName.trim().toLowerCase().slice(0, 25);
+      const normalized = n.productName.trim().toLowerCase();
+      const titleKey = normalized.split(/\s+/).slice(0, 3).join(" ");
       if (seenIds.has(id) || seenTitles.has(titleKey)) continue;
       seenIds.add(id);
       seenTitles.add(titleKey);
