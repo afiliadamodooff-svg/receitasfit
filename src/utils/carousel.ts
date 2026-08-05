@@ -159,7 +159,12 @@ async function buildCardSlide(
   const canvas = newCanvas();
   const ctx = canvas.getContext("2d")!;
 
-  ctx.fillStyle = CREAM;
+  ctx.save();
+  ctx.filter = "blur(28px)";
+  drawCoverImage(ctx, img, -20, -20, W + 40, H + 40);
+  ctx.restore();
+
+  ctx.fillStyle = "rgba(255,248,238,0.8)";
   ctx.fillRect(0, 0, W, H);
 
   // pagina
