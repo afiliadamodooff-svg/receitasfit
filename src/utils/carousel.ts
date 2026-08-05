@@ -110,14 +110,6 @@ async function buildCoverSlide(recipe: Recipe, img: HTMLImageElement): Promise<H
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, W, H);
 
-  // tag "salva para depois"
-  ctx.fillStyle = "rgba(255,255,255,0.95)";
-  roundRect(ctx, 60, 70, 380, 66, 33);
-  ctx.fill();
-  ctx.fillStyle = DARK;
-  ctx.font = "bold 30px Segoe UI, sans-serif";
-  ctx.fillText("📌 SALVA PARA DEPOIS", 90, 112);
-
   // titulo com fundo "grifado"
   ctx.font = "bold 76px Georgia, serif";
   const words = recipe.title.split(" ");
