@@ -26,7 +26,7 @@ function assinar(appId, secret, payload) {
 }
 
 async function buscarOferta(appId, secret, keyword) {
-  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 3) { nodes { itemId productName offerLink imageUrl priceMin commissionRate } } }`;
+  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 8) { nodes { itemId productName offerLink imageUrl priceMin commissionRate } } }`;
   const payload = { query };
   const headers = assinar(appId, secret, payload);
 
@@ -52,15 +52,20 @@ export default async function handler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=1800, stale-while-revalidate");
 
   try {
-    const keyword = KEYWORDS[Math.floor(Math.random() * KEYWORDS.length)];
-    const nodes = await buscarOferta(appId, secret, keyword);
+    const shuffled = [...KEYWORDS].sort(() => Math.random() - 0.5);
+    const [k1, k2] = shuffled;
+    const [nodes1, nodes2] = await Promise.all([
+      buscarOferta(appId, secret, k1),
+      buscarOferta(appId, secret, k2),
+    ]);
 
-    const offers = nodes
+    const offers = [...nodes1, ...nodes2]
       .filter((n) => n.offerLink && n.productName)
       .map((n) => ({
         id: String(n.itemId),
         title: n.productName,
         image: n.imageUrl,
+        price: parseFloat(n.priceMin) || null,
         affiliateLink: n.offerLink,
       }));
 

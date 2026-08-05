@@ -8,14 +8,19 @@ import { useFavorites } from "../hooks/useFavorites";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<string | "favoritos" | null>(null);
+  const [search, setSearch] = useState("");
   const { favorites } = useFavorites();
 
-  const filtered =
+  const byCategory =
     activeCategory === "favoritos"
       ? recipes.filter((r) => favorites.includes(r.id))
       : activeCategory
       ? recipes.filter((r) => r.category === activeCategory)
       : recipes;
+
+  const filtered = search.trim()
+    ? byCategory.filter((r) => r.title.toLowerCase().includes(search.trim().toLowerCase()))
+    : byCategory;
 
   return (
     <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 pb-10">
@@ -30,9 +35,17 @@ export default function Home() {
         </Link>
       </header>
 
-      <div className="mb-4 md:max-w-md">
+      <div className="mb-4">
         <OfferBanner />
       </div>
+
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Buscar receita por nome..."
+        className="w-full mb-3 px-4 py-2 rounded-full bg-white shadow text-sm text-fit-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-fit-green"
+      />
 
       <div className="flex gap-2 overflow-x-auto pb-2 mb-4">
         <button
