@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import recipes from "../data/recipes.json";
 import categories from "../data/categories.json";
 import RecipeCard from "../components/RecipeCard";
@@ -27,12 +26,6 @@ export default function Home() {
       <header className="pt-6 pb-4 text-center">
         <h1 className="text-2xl font-bold text-fit-dark">Receitas Fit 🥑</h1>
         <p className="text-sm text-gray-500">Práticas, rápidas e de verdade</p>
-        <Link
-          to="/carrosseis"
-          className="inline-block mt-2 text-xs font-semibold text-fit-orange"
-        >
-          🎠 Baixar carrosséis pro Instagram
-        </Link>
       </header>
 
       <div className="mb-4">
