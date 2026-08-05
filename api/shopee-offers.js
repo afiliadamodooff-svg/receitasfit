@@ -26,7 +26,7 @@ function assinar(appId, secret, payload) {
 }
 
 async function buscarOferta(appId, secret, keyword) {
-  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 8) { nodes { itemId productName offerLink imageUrl priceMin priceDiscountRate commissionRate } } }`;
+  const query = `{ productOfferV2(keyword: "${keyword.replace(/"/g, "")}", listType: 0, sortType: 2, page: 1, limit: 4) { nodes { itemId productName offerLink imageUrl priceMin priceDiscountRate commissionRate } } }`;
   const payload = { query };
   const headers = assinar(appId, secret, payload);
 
@@ -53,29 +53,36 @@ export default async function handler(req, res) {
 
   try {
     const shuffled = [...KEYWORDS].sort(() => Math.random() - 0.5);
-    const [k1, k2] = shuffled;
-    const [nodes1, nodes2] = await Promise.all([
-      buscarOferta(appId, secret, k1),
-      buscarOferta(appId, secret, k2),
-    ]);
+    const chosen = shuffled.slice(0, 4);
+    const results = await Promise.all(chosen.map((k) => buscarOferta(appId, secret, k)));
 
-    const offers = [...nodes1, ...nodes2]
-      .filter((n) => n.offerLink && n.productName)
-      .map((n) => {
-        const price = parseFloat(n.priceMin) || null;
-        const discountRate = parseFloat(n.priceDiscountRate) || 0;
-        const originalPrice = price && discountRate > 0 ? price / (1 - discountRate / 100) : null;
-        return {
-          id: String(n.itemId),
-          title: n.productName,
-          image: n.imageUrl,
-          price,
-          originalPrice,
-          discountRate,
-          isFlash: discountRate >= 20,
-          affiliateLink: n.offerLink,
-        };
+    const seenIds = new Set();
+    const seenTitles = new Set();
+    const offers = [];
+
+    for (const n of results.flat()) {
+      if (!n.offerLink || !n.productName) continue;
+      const id = String(n.itemId);
+      const titleKey = n.productName.trim().toLowerCase().slice(0, 25);
+      if (seenIds.has(id) || seenTitles.has(titleKey)) continue;
+      seenIds.add(id);
+      seenTitles.add(titleKey);
+
+      const price = parseFloat(n.priceMin) || null;
+      const discountRate = parseFloat(n.priceDiscountRate) || 0;
+      const originalPrice = price && discountRate > 0 ? price / (1 - discountRate / 100) : null;
+
+      offers.push({
+        id,
+        title: n.productName,
+        image: n.imageUrl,
+        price,
+        originalPrice,
+        discountRate,
+        isFlash: discountRate >= 20,
+        affiliateLink: n.offerLink,
       });
+    }
 
     res.status(200).json({ offers });
   } catch (err) {

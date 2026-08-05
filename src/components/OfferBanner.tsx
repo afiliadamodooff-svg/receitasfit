@@ -56,7 +56,7 @@ export default function OfferBanner() {
                 </p>
               )}
               {formatPrice(offer.price) && (
-                <p className="text-sm font-bold text-fit-orange mt-0.5">{formatPrice(offer.price)}</p>
+                <p className="text-xs font-bold text-fit-orange mt-0.5">{formatPrice(offer.price)}</p>
               )}
             </div>
           </a>
